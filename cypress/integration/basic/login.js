@@ -15,15 +15,15 @@ context("First Cypress script", () => {
         cy.get('.decorativeSubmit').click();
     })
     it('click on CRM/SFA', () => {
-        cy.get('#label > a').as('crm');
+        cy.get('div#label > a').as('crm');
         cy.get('@crm').invoke('text').then((text) => {
             console.log('Link text is: ' + text.trim())
         });
         cy.get('@crm').click();
     })
     it('click on Leads', () => {
-        cy.get('a').contains('Leads').click()
-        cy.pause()
+        cy.xpath("//a[@href='/crmsfa/control/leadsMain']").click();
+        // cy.pause()
         cy.get('a').contains('Create Lead').should('contain.text', 'Create Lead').click();
     })
     const type = (locator, value) => cy.get(locator).type(value)
@@ -37,5 +37,4 @@ context("First Cypress script", () => {
     it('verify Lead is created', () => {
         cy.get('#viewLead_companyName_sp').should('contain.text', 'TestLeaf');
     })
-
 })
